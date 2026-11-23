@@ -1,0 +1,100 @@
+INTELLIGENCE REPORT
+========================================
+
+Message ID: MSG001
+Decoded Message: meet at station zero
+Keywords Found: MEET
+Threat Score: 5
+
+Message ID: MSG002
+Decoded Message: OPERATIONPHOENIX
+Keywords Found: OPERATION
+Threat Score: 0
+
+Message ID: MSG003
+Decoded Message: SECRETKEY
+Keywords Found: SECRET
+Threat Score: 10
+
+Message ID: MSG004
+Decoded Message: attack at station radar
+Keywords Found: ATTACK
+Threat Score: 15
+
+Message ID: MSG005
+Decoded Message: SAFEHOUSEDELTA
+Keywords Found: SAFEHOUSE
+Threat Score: 0
+
+Message ID: MSG006
+Decoded Message: MISSIONLOG
+Keywords Found: MISSION
+Threat Score: 0
+
+Message ID: MSG007
+Decoded Message: deltabravo
+Keywords Found: None
+Threat Score: 0
+
+Message ID: MSG008
+Decoded Message: location of supply cache
+Keywords Found: LOCATION
+Threat Score: 0
+
+Message ID: MSG009
+Decoded Message: RENDEZVOUS0600
+Keywords Found: RENDEZVOUS
+Threat Score: 3
+
+Message ID: MSG010
+Decoded Message: SECRETPASSCODE
+Keywords Found: SECRET
+Threat Score: 10
+
+========================================
+SUMMARY
+========================================
+
+Total Messages: 10
+Highest Threat Score: 15
+
+Keyword Totals
+SECRET: 2
+MEET: 1
+MISSION: 1
+ATTACK: 1
+LOCATION: 1
+OPERATION: 1
+SAFEHOUSE: 1
+RENDEZVOUS: 1
+
+Most Common Word
+Word: AT 
+Occurrences: 2 
+
+Communication Network
+SECRET
+  -> MSG003
+  -> MSG010
+
+MEET
+  -> MSG001
+
+MISSION
+  -> MSG006
+
+ATTACK
+  -> MSG004
+
+LOCATION
+  -> MSG008
+
+OPERATION
+  -> MSG002
+
+SAFEHOUSE
+  -> MSG005
+
+RENDEZVOUS
+  -> MSG009
+

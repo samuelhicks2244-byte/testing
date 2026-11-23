@@ -1,0 +1,158 @@
+INTELLIGENCE REPORT
+========================================
+
+Message ID: MSG001
+Decoded Message: SECRETRENDEZVOUS
+Keywords Found: SECRET, RENDEZVOUS
+Threat Score: 10
+
+Message ID: MSG002
+Decoded Message: attack position alpha
+Keywords Found: ATTACK
+Threat Score: 15
+
+Message ID: MSG003
+Decoded Message: move to location delta
+Keywords Found: LOCATION
+Threat Score: 0
+
+Message ID: MSG004
+Decoded Message: RENDEZVOUS1500
+Keywords Found: RENDEZVOUS
+Threat Score: 3
+
+Message ID: MSG005
+Decoded Message: MISSIONCOMPLETE
+Keywords Found: MISSION
+Threat Score: 0
+
+Message ID: MSG006
+Decoded Message: hello control
+Keywords Found: None
+Threat Score: 0
+
+Message ID: MSG007
+Decoded Message: SECRETPACKAGE
+Keywords Found: SECRET
+Threat Score: 10
+
+Message ID: MSG008
+Decoded Message: OPERATIONEAGLE
+Keywords Found: OPERATION
+Threat Score: 0
+
+Message ID: MSG009
+Decoded Message: attack from north
+Keywords Found: ATTACK
+Threat Score: 15
+
+Message ID: MSG010
+Decoded Message: SAFEHOUSE
+Keywords Found: SAFEHOUSE
+Threat Score: 0
+
+Message ID: MSG011
+Decoded Message: move to location gamma
+Keywords Found: LOCATION
+Threat Score: 0
+
+Message ID: MSG012
+Decoded Message: RENDEZVOUS1800
+Keywords Found: RENDEZVOUS
+Threat Score: 3
+
+Message ID: MSG013
+Decoded Message: missionREPORT
+Keywords Found: MISSION
+Threat Score: 0
+
+Message ID: MSG014
+Decoded Message: SECRETFILES
+Keywords Found: SECRET
+Threat Score: 10
+
+Message ID: MSG015
+Decoded Message: hello operator
+Keywords Found: None
+Threat Score: 0
+
+Message ID: MSG016
+Decoded Message: mission078BRAVO
+Keywords Found: MISSION
+Threat Score: 3
+
+Message ID: MSG017
+Decoded Message: attack at dawn
+Keywords Found: ATTACK
+Threat Score: 15
+
+Message ID: MSG018
+Decoded Message: 007MISSIONupdate
+Keywords Found: MISSION
+Threat Score: 3
+
+Message ID: MSG019
+Decoded Message: move to entrance beta
+Keywords Found: None
+Threat Score: 0
+
+Message ID: MSG020
+Decoded Message: SECRETattack999
+Keywords Found: SECRET, ATTACK
+Threat Score: 28
+
+========================================
+SUMMARY
+========================================
+
+Total Messages: 20
+Highest Threat Score: 28
+
+Keyword Totals
+SECRET: 4
+MEET: 0
+MISSION: 4
+ATTACK: 4
+LOCATION: 2
+OPERATION: 1
+SAFEHOUSE: 1
+RENDEZVOUS: 3
+
+Most Common Word
+Word: ATTACK 
+Occurrences: 3 
+
+Communication Network
+SECRET
+  -> MSG001
+  -> MSG007
+  -> MSG014
+  -> MSG020
+
+MISSION
+  -> MSG005
+  -> MSG013
+  -> MSG016
+  -> MSG018
+
+ATTACK
+  -> MSG002
+  -> MSG009
+  -> MSG017
+  -> MSG020
+
+LOCATION
+  -> MSG003
+  -> MSG011
+
+OPERATION
+  -> MSG008
+
+SAFEHOUSE
+  -> MSG010
+
+RENDEZVOUS
+  -> MSG001
+  -> MSG004
+  -> MSG012
+

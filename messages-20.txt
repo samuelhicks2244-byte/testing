@@ -1,0 +1,20 @@
+MSG001|SE#CR#ET#RENDE#ZVOUS#
+MSG002|kcatta noitisop ahpla
+MSG003|evom ot noitacol atled
+MSG004|xRENDEZVOUS1500x
+MSG005|#MI#S#SION#COMPLETE
+MSG006|olleh lortnoc
+MSG007|SE#CR#ET#PACKAGE
+MSG008|xOPERATIONEAGLEx
+MSG009|kcatta morf htron
+MSG010|SAFE#HO#USE
+MSG011|evom ot noitacol ammag
+MSG012|xRENDEZVOUS1800x
+MSG013|mis#sion#REPORT
+MSG014|SE#CR#ET#FILES
+MSG015|olleh rotarepo
+MSG016|xmission078BRAVOx
+MSG017|kcatta ta nwad
+MSG018|007MISSION#u#pdate#
+MSG019|evom ot ecnartne ateb
+MSG020|SE#CR#ET##att#ack999
