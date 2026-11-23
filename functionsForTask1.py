@@ -2,10 +2,9 @@
 
 def OpenAndStoreMessages(filename):
     file = open(filename, "r")
-
+    messages = []
     for line in file:
         line = line.strip()
-        messages = []
         if line != "":
             TwoParts = line.split("|", 1)
             msg_id = TwoParts[0]
@@ -14,3 +13,5 @@ def OpenAndStoreMessages(filename):
             row.append(msg_id)
             row.append(string)
             messages.append(row)
+    file.close()
+    return messages

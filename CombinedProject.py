@@ -4,10 +4,9 @@
 
 def OpenAndStoreMessages(filename):
     file = open(filename, "r")
-
+    messages = []
     for line in file:
         line = line.strip()
-        messages = []
         if line != "":
             TwoParts = line.split("|", 1)
             msg_id = TwoParts[0]
@@ -17,8 +16,8 @@ def OpenAndStoreMessages(filename):
             row.append(string)
             messages.append(row)
             print(messages)
-
-OpenAndStoreMessages("messages-20.txt")
+    file.close()
+    return messages
 
 # this is the functions for task 2
 
@@ -32,3 +31,54 @@ OpenAndStoreMessages("messages-20.txt")
     # return the message ids alongside the keywords that are in the messages (acts as a network)
     # allow the user to enter a string and then allow them to choose an encoding method to use on there string (no file management is required in this task)
     # optimise code quality
+
+# Rule 1: if a message starts and ends with the character x, remove both characters
+def OuterCharactersRemovalX(string):
+    if len(string) >= 2 and string[0] == "x" and string[-1] == "x":
+        cleanString = string[1:-1]
+    else:
+        cleanString = string
+    return cleanString
+
+# Rule 2: if a message contains any space, each word is reversed individually
+def ReverseWordsIfContainSpaces(string):
+    if " " in string:
+        wordList = string.split(" ")
+        reversedWordList = []
+        for word in wordList:
+            reversedWordList.append(word[::-1])
+        cleanString = " ".join(reversedWordList)
+    else:
+        cleanString = string
+    return cleanString
+
+# Rule 3: remove random # noise characters
+def HashtagCharactersRemoval(string):
+    if "#" in string:
+        cleanString = string.replace("#", "")
+    else:
+        cleanString = string
+    return cleanString
+
+# Rule 4: messages beginning with ! discard every other character
+def EveryOtherCharacterRemoval(string):
+    if len(string) > 0 and string[0] == "!":
+        cleanString = string[1::2]
+    else:
+        cleanString = string
+    return cleanString
+
+def DecodeMessage(encodedMessage):
+    if encodedMessage == "":
+        decodedMessage = encodedMessage
+    elif encodedMessage[0] == "!":
+        decodedMessage = EveryOtherCharacterRemoval(encodedMessage)
+    elif len(encodedMessage) >= 2 and encodedMessage[0] == "x" and encodedMessage[-1] == "x":
+        decodedMessage = OuterCharactersRemovalX(encodedMessage)
+    elif " " in encodedMessage:
+        decodedMessage = ReverseWordsIfContainSpaces(encodedMessage)
+    elif "#" in encodedMessage:
+        decodedMessage = HashtagCharactersRemoval(encodedMessage)
+    else:
+        decodedMessage = encodedMessage
+    return decodedMessage
