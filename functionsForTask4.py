@@ -17,4 +17,4 @@ def CalculatingAThreatScore(string):
         if character.isdigit():
             score += 3
             break                        #makes sure 3 isnt added mutltiple times
-    return score, threatWordTotal
+    return score

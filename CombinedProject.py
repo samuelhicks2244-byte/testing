@@ -1,7 +1,12 @@
-## for workload management habits i made the functions required for each task in separate files and then combined them
+## for workload management habits i made the functions required for each task in separate files and then combined them after
+
+MESSAGES_FILE = "messages-20.txt"
+KEYWORDS_FILE = "keywords.txt"
+REPORT_FILE = "report-20.txt"
 
 # read all communications from messages.txt. There will be between zero and n lines in the file, each communication is on a separate line and you should process every messages in the file.
 
+#task 1: read and store messages
 def OpenAndStoreMessages(filename):
     file = open(filename, "r")
     messages = []
@@ -15,24 +20,10 @@ def OpenAndStoreMessages(filename):
             row.append(msg_id)
             row.append(string)
             messages.append(row)
-            print(messages)
     file.close()
     return messages
 
-# this is the functions for task 2
-
-### to do
-
-# it does say in the spec to put all task 2 functions together in 1 but to make avdanced task 3 easier dont do that (isolate the individual encoding functions)
-# transition between task 1 and 2 by taking the messages taken from the file and putting them into the task 2 functions
-# have a look at the threat score calc as task 5 and 6 require more data than what is currently being fetched
-# work on the advanced tasks functions
-    # most common word (this includes all words not just the keywords)
-    # return the message ids alongside the keywords that are in the messages (acts as a network)
-    # allow the user to enter a string and then allow them to choose an encoding method to use on there string (no file management is required in this task)
-    # optimise code quality
-
-# Rule 1: if a message starts and ends with the character x, remove both characters
+#rule 1: if the first and last character is x then remove both
 def OuterCharactersRemovalX(string):
     if len(string) >= 2 and string[0] == "x" and string[-1] == "x":
         cleanString = string[1:-1]
@@ -40,7 +31,7 @@ def OuterCharactersRemovalX(string):
         cleanString = string
     return cleanString
 
-# Rule 2: if a message contains any space, each word is reversed individually
+#rule 2: if there is a space anywhere then flip each word seperately
 def ReverseWordsIfContainSpaces(string):
     if " " in string:
         wordList = string.split(" ")
@@ -52,7 +43,7 @@ def ReverseWordsIfContainSpaces(string):
         cleanString = string
     return cleanString
 
-# Rule 3: remove random # noise characters
+#rule 3: remove all #
 def HashtagCharactersRemoval(string):
     if "#" in string:
         cleanString = string.replace("#", "")
@@ -60,7 +51,7 @@ def HashtagCharactersRemoval(string):
         cleanString = string
     return cleanString
 
-# Rule 4: messages beginning with ! discard every other character
+#rule 4: if the first character is ! every other character is removed
 def EveryOtherCharacterRemoval(string):
     if len(string) > 0 and string[0] == "!":
         cleanString = string[1::2]
@@ -68,6 +59,7 @@ def EveryOtherCharacterRemoval(string):
         cleanString = string
     return cleanString
 
+# combine the rules in the right order and use if statements again for easier code reading
 def DecodeMessage(encodedMessage):
     if encodedMessage == "":
         decodedMessage = encodedMessage
@@ -82,3 +74,67 @@ def DecodeMessage(encodedMessage):
     else:
         decodedMessage = encodedMessage
     return decodedMessage
+
+#task 4: calculate the threat for "decodedMessage"
+def CalculatingAThreatScore(decodedMessage):
+    upperMessage = decodedMessage.upper()
+    score = 0
+
+    if "SECRET" in upperMessage:
+        score += 10
+    if "MEET" in upperMessage:
+        score += 5
+    if "ATTACK" in upperMessage:
+        score += 15
+
+    for character in decodedMessage:
+        if character.isdigit():
+            score += 3
+            break           #so that only ever adds 3 once
+    return score
+
+#task 3: keyword analysis
+#
+def ReadKeywords(filename):
+    file = open(filename, "r")
+    keywords = []
+    for line in file:
+        line = line.strip()
+        if line != "":
+            keywords.append(line.upper())
+    file.close()
+    return keywords
+
+def FindKeywords(decodedMessage, keywords):
+    upperMessage = decodedMessage.upper()
+    keywordsFound = []
+    for keyword in keywords:
+        if keyword in upperMessage:
+            keywordsFound.append(keyword)
+    return keywordsFound
+
+#runs the whole analysis: 
+def Main():
+    keywords = ReadKeywords(KEYWORDS_FILE)
+    messages = OpenAndStoreMessages(MESSAGES_FILE)
+
+    lockedInMessages = []
+    for row in messages:
+        messageId = row[0]
+        encodedMessage = row[1]
+
+        decodedMessage = DecodeMessage(encodedMessage)
+        keywordsFound = FindKeywords(decodedMessage, keywords)
+        score = CalculatingAThreatScore(decodedMessage)
+
+        lockedInMessages.append([messageId, decodedMessage, keywordsFound, score])
+
+    # check
+    for row in lockedInMessages:
+        print(row)
+
+    # WriteReport(analysedMessages, keywords)
+
+
+Main()
+
