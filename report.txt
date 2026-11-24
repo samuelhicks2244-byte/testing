@@ -114,3 +114,39 @@ LOCATION: 2
 OPERATION: 1
 SAFEHOUSE: 1
 RENDEZVOUS: 3
+
+Communication Network
+-------------------
+SECRET
+  -> MSG001
+  -> MSG007
+  -> MSG014
+  -> MSG020
+
+MISSION
+  -> MSG005
+  -> MSG013
+  -> MSG016
+  -> MSG018
+
+ATTACK
+  -> MSG002
+  -> MSG009
+  -> MSG017
+  -> MSG020
+
+LOCATION
+  -> MSG003
+  -> MSG011
+
+OPERATION
+  -> MSG008
+
+SAFEHOUSE
+  -> MSG010
+
+RENDEZVOUS
+  -> MSG001
+  -> MSG004
+  -> MSG012
+

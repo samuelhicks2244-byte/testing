@@ -1,4 +1,5 @@
-## for workload management habits i made the functions required for each task in separate files and then combined them after
+# CS-002 Coursework - Intelligence message analysis system
+# Samuel Hicks
 
 MESSAGES_FILE = "messages-20.txt"
 KEYWORDS_FILE = "keywords.txt"
@@ -13,11 +14,11 @@ def OpenAndStoreMessages(filename):
     for line in file:
         line = line.strip()
         if line != "":
-            TwoParts = line.split("|", 1)
-            msg_id = TwoParts[0]
-            string = TwoParts[1]
+            twoParts = line.split("|", 1)
+            messageId = twoParts[0]
+            string = twoParts[1]
             row = []
-            row.append(msg_id)
+            row.append(messageId)
             row.append(string)
             messages.append(row)
     file.close()
@@ -33,15 +34,12 @@ def OuterCharactersRemovalX(string):
 
 #rule 2: if there is a space anywhere then flip each word seperately
 def ReverseWordsIfContainSpaces(string):
-    if " " in string:
-        wordList = string.split(" ")
+        wordList = string.split(" ")                  # removed if here so that i could use this function easily in the advanced tasks
         reversedWordList = []
         for word in wordList:
-            reversedWordList.append(word[::-1])
-        cleanString = " ".join(reversedWordList)
-    else:
-        cleanString = string
-    return cleanString
+            reversedWordList.append(word[::-1])              #:)
+        return " ".join(reversedWordList)
+
 
 #rule 3: remove all #
 def HashtagCharactersRemoval(string):
@@ -59,7 +57,7 @@ def EveryOtherCharacterRemoval(string):
         cleanString = string
     return cleanString
 
-# combine the rules in the right order and use if statements again for easier code reading
+# combine the rules in the right order, i redid the if statements to make the code easier to read
 def DecodeMessage(encodedMessage):
     if encodedMessage == "":
         decodedMessage = encodedMessage
@@ -93,7 +91,7 @@ def CalculatingAThreatScore(decodedMessage):
             break           #so that only ever adds 3 once
     return score
 
-#task 3: keyword analysis
+#task 3: keyword and message comparison
 #read the keyword file
 def ReadKeywords(filename):
     file = open(filename, "r")
@@ -105,7 +103,7 @@ def ReadKeywords(filename):
     file.close()
     return keywords
 
-#search the decoded message with the keywords from file
+#compare the keywords with the file to see if they are in there
 def FindKeywords(decodedMessage, keywords):
     upperMessage = decodedMessage.upper()
     keywordsFound = []
@@ -136,14 +134,17 @@ def WriteReport(lockedInMessages, keywords):
     #task 6: calc and write the summary values
     highestScore = 0
     keywordTotals = {}
+    communicationNetwork = {}
     for keyword in keywords:
         keywordTotals[keyword] = 0
+        communicationNetwork[keyword] = []
 
     for row in lockedInMessages:
         if row[3] > highestScore:
             highestScore = row[3]
         for keyword in row[2]:
             keywordTotals[keyword] = keywordTotals[keyword] + 1
+            communicationNetwork[keyword].append(row[0])
 
     file.write("SUMMARY\n")
     file.write("-------------------\n")
@@ -153,10 +154,51 @@ def WriteReport(lockedInMessages, keywords):
     for keyword in keywords:
         file.write(keyword + ": " + str(keywordTotals[keyword]) + "\n")
 
+    #advanced task 2: communication network
+    file.write("\n")
+    file.write("Communication Network\n")
+    file.write("-------------------\n")
+    for keyword in keywords:
+        if len(communicationNetwork[keyword]) > 0:
+            file.write(keyword + "\n")
+            for messageId in communicationNetwork[keyword]:
+                file.write("  -> " + messageId + "\n")
+            file.write("\n")
     file.close()
 
+#reverse function for advanced task 3
+def EncodeWithOuterX(message):
+    return "x" + message + "x"
 
-#runs the whole analysis: 
+
+#advanced task 3: get a message from the user
+def EncodeNewMessage():
+    message = input("Enter a message: ")
+
+    print("")
+    print("Encoding Methods")
+    print("1 - Reverse each word")
+    print("2 - Add # noise characters")
+    print("3 - Add x to beginning and end")
+    print("4 - Create a ! encoded message")
+    choice = input("Choose an option: ")
+
+    if choice == "1":
+        encodedMessage = ReverseWordsIfContainSpaces(message)
+    elif choice == "3":
+        encodedMessage = EncodeWithOuterX(message)
+    else:
+        print("Option not avaliable")
+        return
+
+    print("")
+    print("Original Message:")
+    print(message)
+    print("")
+    print("Encoded Message:")
+    print(encodedMessage)
+
+
 def Main():
     keywords = ReadKeywords(KEYWORDS_FILE)
     messages = OpenAndStoreMessages(MESSAGES_FILE)
@@ -174,6 +216,7 @@ def Main():
 
     WriteReport(lockedInMessages, keywords)
 
+    EncodeNewMessage()
 
 Main()
 
