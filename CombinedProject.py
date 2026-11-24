@@ -1,7 +1,7 @@
 # CS-002 Coursework - Intelligence message analysis system
 # Samuel Hicks
 
-MESSAGES_FILE = "messages-20.txt"
+MESSAGES_FILE = "messages.txt"
 KEYWORDS_FILE = "keywords.txt"
 REPORT_FILE = "report.txt"
 
@@ -34,11 +34,11 @@ def OuterCharactersRemovalX(string):
 
 #rule 2: if there is a space anywhere then flip each word seperately
 def ReverseWordsIfContainSpaces(string):
-        wordList = string.split(" ")                  # removed if here so that i could use this function easily in the advanced tasks
-        reversedWordList = []
-        for word in wordList:
-            reversedWordList.append(word[::-1])              #:)
-        return " ".join(reversedWordList)
+    wordList = string.split(" ")                  # removed if here so that i could use this function easily in the advanced tasks
+    reversedWordList = []
+    for word in wordList:
+        reversedWordList.append(word[::-1])              #:)
+    return " ".join(reversedWordList)
 
 
 #rule 3: remove all #
@@ -166,7 +166,7 @@ def WriteReport(lockedInMessages, keywords):
             file.write("\n")
     file.close()
 
-#reverse function for advanced task 3
+#x function for advanced task 3
 def EncodeWithOuterX(message):
     return "x" + message + "x"
 
