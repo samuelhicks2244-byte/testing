@@ -115,29 +115,43 @@ def FindKeywords(decodedMessage, keywords):
     return keywordsFound
 
 #task 5: write the report to report.txt
-def WriteReport(analysedMessages, keywords):
+def WriteReport(lockedInMessages, keywords):
     file = open(REPORT_FILE, "w")
 
     file.write("INTELLIGENCE REPORT\n")
-    file.write("========================================\n")
+    file.write("-------------------\n")
 
-    for row in analysedMessages:
+    for row in lockedInMessages:
         messageId = row[0]
         decodedMessage = row[1]
         keywordsFound = row[2]
         score = row[3]
-
-        if len(keywordsFound) > 0:
-            keywordText = ", ".join(keywordsFound)
-        else:
-            keywordText = "None"
+        keywordText = ", ".join(keywordsFound)
 
         file.write("Message ID: " + messageId + "\n")
-        file.write("Decoded Message: " + decodedMessage + "\n")
-        file.write("Keywords Found: " + keywordText + "\n")
-        file.write("Threat Score: " + str(score) + "\n\n")
+        file.write("Decoded message: " + decodedMessage + "\n")
+        file.write("Keywords found: " + keywordText + "\n")
+        file.write("Threat score: " + str(score) + "\n\n")
 
-    # task 6: summary block goes here, before the file is closed
+    #task 6: calc and write the summary values
+    highestScore = 0
+    keywordTotals = {}
+    for keyword in keywords:
+        keywordTotals[keyword] = 0
+
+    for row in lockedInMessages:
+        if row[3] > highestScore:
+            highestScore = row[3]
+        for keyword in row[2]:
+            keywordTotals[keyword] = keywordTotals[keyword] + 1
+
+    file.write("SUMMARY\n")
+    file.write("-------------------\n")
+    file.write("Total Messages: " + str(len(lockedInMessages)) + "\n")
+    file.write("Highest Threat Score: " + str(highestScore) + "\n\n")
+    file.write("Keyword Totals\n")
+    for keyword in keywords:
+        file.write(keyword + ": " + str(keywordTotals[keyword]) + "\n")
 
     file.close()
 
@@ -158,11 +172,7 @@ def Main():
 
         lockedInMessages.append([messageId, decodedMessage, keywordsFound, score])
 
-    # check
-    for row in lockedInMessages:
-        print(row)
-
-    # WriteReport(analysedMessages, keywords)
+    WriteReport(lockedInMessages, keywords)
 
 
 Main()
