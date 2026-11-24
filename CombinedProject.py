@@ -2,7 +2,7 @@
 
 MESSAGES_FILE = "messages-20.txt"
 KEYWORDS_FILE = "keywords.txt"
-REPORT_FILE = "report-20.txt"
+REPORT_FILE = "report.txt"
 
 # read all communications from messages.txt. There will be between zero and n lines in the file, each communication is on a separate line and you should process every messages in the file.
 
@@ -94,7 +94,7 @@ def CalculatingAThreatScore(decodedMessage):
     return score
 
 #task 3: keyword analysis
-#
+#read the keyword file
 def ReadKeywords(filename):
     file = open(filename, "r")
     keywords = []
@@ -105,6 +105,7 @@ def ReadKeywords(filename):
     file.close()
     return keywords
 
+#search the decoded message with the keywords from file
 def FindKeywords(decodedMessage, keywords):
     upperMessage = decodedMessage.upper()
     keywordsFound = []
@@ -112,6 +113,34 @@ def FindKeywords(decodedMessage, keywords):
         if keyword in upperMessage:
             keywordsFound.append(keyword)
     return keywordsFound
+
+#task 5: write the report to report.txt
+def WriteReport(analysedMessages, keywords):
+    file = open(REPORT_FILE, "w")
+
+    file.write("INTELLIGENCE REPORT\n")
+    file.write("========================================\n")
+
+    for row in analysedMessages:
+        messageId = row[0]
+        decodedMessage = row[1]
+        keywordsFound = row[2]
+        score = row[3]
+
+        if len(keywordsFound) > 0:
+            keywordText = ", ".join(keywordsFound)
+        else:
+            keywordText = "None"
+
+        file.write("Message ID: " + messageId + "\n")
+        file.write("Decoded Message: " + decodedMessage + "\n")
+        file.write("Keywords Found: " + keywordText + "\n")
+        file.write("Threat Score: " + str(score) + "\n\n")
+
+    # task 6: summary block goes here, before the file is closed
+
+    file.close()
+
 
 #runs the whole analysis: 
 def Main():
